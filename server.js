@@ -14,15 +14,15 @@ app.use(express.json()); // Enable Express to parse JSON formatted request bodie
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB using Mongoose
-mongoose.connect('mongodb+srv://mokwastudies:mokwastudies1234@cluster0.eedppla.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true, // Use the new URL parser
     useUnifiedTopology: true, // Use the new server discovery and monitoring engine
 }).then(() => {
-    console.log('Connected to MongoDB'); // Log successful MongoDB connection
+    console.log('✅ MongoDB is connected successfully...'); // Log successful MongoDB connection
     // Start the Express server after successful MongoDB connection
     app.listen(PORT, () => {
         console.log(`✅ Server is running on port ${PORT}`); // Log server startup with the port
     });
 }).catch(err => {
-    console.error('Connection error', err); // Log any MongoDB connection errors
+    console.error('❌ MongoDB connection failed: [error]', err); // Log any MongoDB connection errors
 });
